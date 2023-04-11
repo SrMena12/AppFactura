@@ -1,0 +1,11 @@
+.total-column {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .custom-table {
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+  }

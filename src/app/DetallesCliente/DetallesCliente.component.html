@@ -1,0 +1,43 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="text-left total-column">Factura Simple</h1>
+    </div>
+    <div class="col-md-6 text-right">
+      <div class="image-container">
+        <img *ngIf="showImage" [src]="imageUrl" height="40px" width="350px" alt="Logo de la empresa">
+        <br> <!-- Agregamos un salto de línea aquí para que los botones aparezcan debajo del logo -->
+        <button class="btn btn-link" (click)="hideImage()">Esconder</button>
+        <button class="btn btn-link" (click)="changeImage()">Cambiar</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 text-left">
+      <h4 *ngIf="!editingField || editingField !== 'name'" (click)="editCustomerField('name')">
+        <ng-container *ngIf="editingCustomerField !== 'name'; else nameEditor">
+          {{ invoice.customer.name }}
+        </ng-container>
+        <ng-template #nameEditor>
+          <input type="text" class="form-control" [(ngModel)]="invoice.customer.name" (keyup.enter)="saveCustomer()">
+        </ng-template>
+      </h4>
+      <p *ngIf="!editingField || editingField !== 'address'" (click)="editCustomerField('address')">
+        <ng-container *ngIf="editingCustomerField !== 'address'; else addressEditor">
+          {{ invoice.customer.address }}
+        </ng-container>
+        <ng-template #addressEditor>
+          <input type="text" class="form-control" [(ngModel)]="invoice.customer.address" (keyup.enter)="saveCustomer()">
+        </ng-template>
+      </p>
+      <p *ngIf="!editingField || editingField !== 'city'" (click)="editCustomerField('city')">
+        <ng-container *ngIf="editingCustomerField !== 'city'; else cityEditor">
+          {{ invoice.customer.city }}, {{ invoice.customer.state }} {{ invoice.customer.zip }}
+        </ng-container>
+        <ng-template #cityEditor>
+          <input type="text" class="form-control" [(ngModel)]="invoice.customer.city" (keyup.enter)="saveCustomer()">
+        </ng-template>
+      </p>
+    </div>
+  </div>
+</div>
